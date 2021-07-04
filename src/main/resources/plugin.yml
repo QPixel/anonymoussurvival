@@ -1,0 +1,48 @@
+name: AnonymousSurvival
+version: ${project.version}
+main: dev.qpixel.anonymoussurvival.AnonymousSurvival
+api-version: 1.17
+authors: [ QPixel ]
+description: Disables Chat, Skins, Nametags, and more
+website: https://qpixel.me
+commands:
+  teleport:
+    description: Command that allows ops to teleport to obfuscated player names
+    usage: /<command>
+    aliases: [tp]
+    permission: as.teleport
+    permission-message: You do not have permission to use this command.
+  realname:
+    description: Command that allows ops to teleport to obfuscated player names
+    usage: /<command>
+    aliases: [ rn ]
+    permission: as.rn
+    permission-message: You do not have permission to use this command.
+  obfuscate:
+    description: Reobfuscates all the players
+    usage: /<command>
+    aliases: [ obf ]
+    permission: as.obf
+    permission-message: You do not have permission to use this command.
+  obfself:
+    description: Obfuscates yourself
+    usage: /<command>
+    permission: as.obf
+    permission-message: You do not have permission to use this command.
+
+permissions:
+  as.teleport:
+    description: Allows teleport command
+    default: op
+  as.rn:
+    description: Allows realname command
+    default: op
+  as.obf:
+    description: Allows you to obfuscate yourself and others
+    default: op
+  as.*:
+    description: wildcard perm
+    default: op
+    children:
+      as.teleport: true
+      as.rn: true
