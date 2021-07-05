@@ -19,9 +19,11 @@ import java.util.logging.Logger;
 public final class AnonymousSurvival extends JavaPlugin {
     public Logger logger = getLogger();
     public HashMap<String, PlayerProfile> obfuscatedPlayers = new HashMap();
+    private Team team;
     @Override
     public void onEnable() {
         // Plugin startup logic
+
         setup();
         addCommands();
         addEventListeners();
@@ -31,6 +33,7 @@ public final class AnonymousSurvival extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+
         logger.info("AnonymousSurvival 1.0 has unloaded");
     }
 
@@ -49,11 +52,12 @@ public final class AnonymousSurvival extends JavaPlugin {
     private void setup() {
         // Makes sure the advancements announcements are false. Because why not
         Bukkit.getServer().getWorlds().get(0).setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
-        if (Bukkit.getScoreboardManager().getMainScoreboard().getTeam("hidePlayers") != null) {
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        if (scoreboard.getTeam("hidePlayers") != null) {
+            team = scoreboard.getTeam("hidePlayers");
             return;
         }
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-        Team team = scoreboard.registerNewTeam("hidePlayers");
+        team = scoreboard.registerNewTeam("hidePlayers");
         team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
     }
 }
